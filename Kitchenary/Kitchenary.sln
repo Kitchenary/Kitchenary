@@ -5,6 +5,10 @@ VisualStudioVersion = 15.0.27703.2042
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KitchenaryWebService", "Kitchenary\KitchenaryWebService.csproj", "{CE607DF4-CCEA-4F26-B6DB-8E8E385A08B6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EdamamService", "EdamamService\EdamamService.csproj", "{5FFAE2CE-DB79-408D-99D4-1F6CB24B25AE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EdamamServiceTests", "EdamanServiceTests\EdamamServiceTests.csproj", "{9C6E5A91-9D25-493E-90B3-6362CB81C438}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{CE607DF4-CCEA-4F26-B6DB-8E8E385A08B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CE607DF4-CCEA-4F26-B6DB-8E8E385A08B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CE607DF4-CCEA-4F26-B6DB-8E8E385A08B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5FFAE2CE-DB79-408D-99D4-1F6CB24B25AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5FFAE2CE-DB79-408D-99D4-1F6CB24B25AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5FFAE2CE-DB79-408D-99D4-1F6CB24B25AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5FFAE2CE-DB79-408D-99D4-1F6CB24B25AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C6E5A91-9D25-493E-90B3-6362CB81C438}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C6E5A91-9D25-493E-90B3-6362CB81C438}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C6E5A91-9D25-493E-90B3-6362CB81C438}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C6E5A91-9D25-493E-90B3-6362CB81C438}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
