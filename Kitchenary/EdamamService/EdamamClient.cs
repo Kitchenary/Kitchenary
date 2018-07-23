@@ -31,8 +31,8 @@ namespace EdamamService
             if (response.IsSuccessStatusCode)
             {
                 EdamamResponse deserializedResponse = JsonConvert.DeserializeObject<EdamamResponse>(await response.Content.ReadAsStringAsync());
-                IEnumerable<Recipe> recepies = deserializedResponse.hits.Select(x => x.recipe);
-                return recepies;
+                IEnumerable<Recipe> recipes = deserializedResponse.hits.Select(x => x.recipe);
+                return recipes;
             }
             else
             {
