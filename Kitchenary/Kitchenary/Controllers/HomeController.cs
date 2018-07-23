@@ -25,7 +25,13 @@ namespace Kitchenary.Controllers
         [HttpPost]
         public async Task<ActionResult> Index(string query)
         {
-            var result = await edamamClient.SearchRecipes(query);
+            RecipeSearchSettings settings = new RecipeSearchSettings()
+            {
+                Time = 50,
+                Diet = Diet.LOW_CARB,
+                Excluded = new List<string> { "tofu" }
+            };
+            var result = await edamamClient.SearchRecipes(query, settings);
 
             return View(result);
         }
