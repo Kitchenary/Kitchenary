@@ -1,11 +1,39 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+        ViewBag.Title = "Home Page";
 }
+
+@model IEnumerable<EdamamService.Recipe>
 
 <div class="jumbotron">
     <h1>Kitchenary</h1>
     <p class="lead">Hackathon 2018</p>
     <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+    <div class="form-group">
+        @using (Html.BeginForm("Index", "Home"))
+        {
+        <label for="usr">Search:</label>
+        <input type="text" class="form-control" name="query" value="">
+        <input type="submit" />
+        }
+    </div>
+    @if (Model != null && Model.Count() > 0)
+    {
+        <ul>
+            @foreach (var recipe in Model)
+            {
+                <li>
+                    <b>@recipe.Label</b><br />
+                    Ingredients:
+                    <ul>
+                        @foreach (var ingredient in recipe.Ingredients)
+                        {
+                            <li>@ingredient.Text</li>
+                        }
+                    </ul>
+                </li>
+            }
+        </ul>
+    }
 </div>
 
 <div class="row">

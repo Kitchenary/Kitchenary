@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Net.Http;
+using Newtonsoft.Json;
+
 
 namespace EdamamService
 {
@@ -20,7 +22,7 @@ namespace EdamamService
             this.appKey = appKey;
         }
 
-        public async Task<string> SearchRecipes(string queryString)
+        public async Task<IEnumerable<Recipe>> SearchRecipes(string queryString)
         {
             UriBuilder uri = new UriBuilder("https://api.edamam.com/search");
             uri.Query = $"app_id={appId}&app_key={appKey}&q={queryString}";
@@ -28,7 +30,9 @@ namespace EdamamService
 
             if (response.IsSuccessStatusCode)
             {
-                return await response.Content.ReadAsStringAsync();
+                EdamamResponse deserializedResponse = JsonConvert.DeserializeObject<EdamamResponse>(await response.Content.ReadAsStringAsync());
+                IEnumerable<Recipe> recepies = deserializedResponse.hits.Select(x => x.recipe);
+                return recepies;
             }
             else
             {
