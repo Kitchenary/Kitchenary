@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using Kitchenary.Classes;
 
-namespace Kitchenary.Classes
+namespace Recommendation
 {
     public class IngredientList : Dictionary<String, int>
     {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Kitchenary.Classes
+namespace Recommendation
 {
     public class IngredientsOperations
     {
