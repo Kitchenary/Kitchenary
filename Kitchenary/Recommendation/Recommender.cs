@@ -41,7 +41,7 @@ namespace Recommendation
                 if(addition.Item2 < recipe.Item2)
                 {
                     list.Insert(index, addition);
-                    break;
+                    return list;
                 }
                 index++;
             }
@@ -73,6 +73,7 @@ namespace Recommendation
                     {
                         twelfthMin = topTwelve.ElementAt(11).Item2;
                         topTwelve.RemoveAt(12);
+                        size--;
                     } else if (size == 12)
                     {
                         twelfthMin = topTwelve.ElementAt(11).Item2;
