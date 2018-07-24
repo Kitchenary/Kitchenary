@@ -1,7 +1,8 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Preferences";
 }
+
+@model Kitchenary.Models.PreferencesModel
 
 <html>
 <head>
@@ -31,10 +32,33 @@
     }
     else
     {
-        <div class="jumbotron">
-            <h1>Preferences</h1>
-            <p class="lead">Hello @ViewBag.Name!</p>
-        </div>
+              <div class="jumbotron">
+                  <h1>Preferences</h1>
+                  <p class="lead">Hello @ViewBag.Name!</p>
+                  <p>Select your preferences below:</p>
+
+                  @using (Html.BeginForm("Create", "Preferences", FormMethod.Post))
+                  {
+                  <div class="row">
+                      <div class="col-sm-6">
+                          <h4>Dietary Restrictions:</h4>
+                          @Html.DropDownListFor(x => x.DietaryRestrictions, new SelectList(Enum.GetValues(typeof(EdamamService.Health))), new { multiple = "multiple", @class = "form-control" })
+                      </div>
+
+                      <div class="col-sm-6">
+                          <h4>Diet</h4>
+                          @Html.DropDownListFor(x => x.Diet, new SelectList(Enum.GetValues(typeof(EdamamService.Diet))), new { multiple = "multiple", @class = "form-control" })
+                      </div>
+
+                  </div>
+
+                  <br />
+                      <span class="input-group-btn">
+                          <button class="btn btn-default" type="submit" name="Save Preferences">Save</button>
+                      </span>
+
+                  }
+              </div>
     }
     @if (!string.IsNullOrWhiteSpace(Request.QueryString["errormessage"]))
     {
