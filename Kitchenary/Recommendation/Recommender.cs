@@ -21,13 +21,13 @@ namespace Recommendation
             return listA.Keys.Union(listB.Keys);
         }
 
-        public static double MinSquaredDist(IngredientList listA, IngredientList listB)
+        public static double MinSquaredDist(IngredientList listA, double weightA, IngredientList listB, double weightB)
         {
             double sum = 0;
             IEnumerable<String> keys = getTempVectorSpace(listA, listB);
             foreach (String key in keys)
             {
-                sum += Math.Pow(((int)listA[key]) - ((int)listB[key]), 2);
+                sum += Math.Pow(((int)listA[key])*weightA - ((int)listB[key])*weightB, 2);
             }
 
             return Math.Sqrt(sum);
@@ -62,7 +62,7 @@ namespace Recommendation
             foreach(Recipe recipe in recipes)
             {
                 IngredientList recipeIngr = new IngredientList(recipe);
-                double score = MinSquaredDist(userPreferences, recipeIngr);
+                double score = MinSquaredDist(userPreferences, 1.5, recipeIngr, 1);
 
                 if (score < twelfthMin)
                 {

@@ -17,7 +17,7 @@ namespace Recommendation
         public async Task Tests()
         {
             string[] foods = { "pork", "bread", "peppers", "sugar", "corn" };
-            string[] pantryList = { "potatoes", "pork" };
+            string[] pantryList = { "potatoes", "pork"};
             IngredientList userPreferences = new IngredientList(foods);
             IngredientList pantry = new IngredientList(pantryList);
             List<Tuple<Recipe, double>> recs = await Recommender.GetRecommendations(userPreferences, pantry);

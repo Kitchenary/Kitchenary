@@ -17,7 +17,7 @@ namespace Recommendation
             }
         }
 
-        String[] foods = { "beef", "bread", "turkey", "corn", "potatoes", "cheese", "milk", "pork", "peppers", "sugar"};
+        String[] foods = { "beef", "bread", "turkey", "corn", "potatoes", "cheese", "milk", "pork", "peppers", "sugar", "limes", "lemons" };
 
         private String ExtractFood(String text)
         {
