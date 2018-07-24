@@ -17,6 +17,38 @@ namespace EdamamService
         LOW_FAT,
         LOW_CARB,
         LOW_SODIUM
+    }
+
+    public enum Health
+    {
+        DEFAULT,
+        ALCOHOL_FREE,
+        CELERY_FREE,
+        CRUSTACEAN_FREE,
+        DAIRY_FREE,
+        EGGS_FREE,
+        FISH_FREE,
+        GLUTEN_FREE,
+        KIDNEY_FRIENDLY,
+        KOSHER,
+        LOW_POTASSIUM,
+        LUPINE_FREE,
+        MUSTARD_FREE,
+        NO_OIL_ADDED,
+        LOW_SUGAR,
+        PALEO,
+        PEANUT_FREE,
+        PESCATARIAN,
+        PORK_FREE,
+        RED_MEAT_FREE,
+        SESAME_FREE,
+        SHELLFISH_FREE,
+        SOY_FREE,
+        SUGAR_CONSCIOUS,
+        TREE_NUT_FREE,
+        VEGAN,
+        VEGETARIAN,
+        WHEAT_FREE
 
     }
 
@@ -25,6 +57,7 @@ namespace EdamamService
         public int Time { get; set; }
         public IEnumerable<string> Excluded { get; set; }
         public Diet Diet { get; set; }
+        public IEnumerable<Health> Health { get; set; }
         public string DietString { get { return Enum.GetName(typeof(Diet), Diet).ToLower().Replace("_", "-"); } }
     }
 
@@ -59,6 +92,18 @@ namespace EdamamService
                     foreach(var excludedIngredient in settings.Excluded)
                     {
                         uri.Query += $"&excluded={excludedIngredient}";
+                    }
+                }
+
+                if (settings.Health != null && settings.Health.Count() > 0)
+                {
+                    foreach(var healthSetting in settings.Health)
+                    {
+                        if (healthSetting == Health.DEFAULT)
+                        {
+                            continue;
+                        }
+                        uri.Query += $"&health={healthSetting.ToString().ToLower().Replace("_", "-")}";
                     }
                 }
 

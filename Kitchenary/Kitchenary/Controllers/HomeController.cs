@@ -46,17 +46,23 @@ namespace Kitchenary.Controllers
 
         public async Task<ActionResult> Index()
         {
+            var userClaims = User.Identity as System.Security.Claims.ClaimsIdentity;
+            ViewBag.Name = userClaims?.FindFirst("name")?.Value;
             return View();
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<ActionResult> Index(string query)
         {
+            var userClaims = User.Identity as System.Security.Claims.ClaimsIdentity;
+            ViewBag.Name = userClaims?.FindFirst("name")?.Value;
+
             RecipeSearchSettings settings = new RecipeSearchSettings()
             {
                 Time = 50,
                 Diet = Diet.LOW_CARB,
-                Excluded = new List<string> { "tofu" }
+                Excluded = new List<string> { "tofu" },
             };
             var result = await edamamClient.SearchRecipes(query, settings);
 
