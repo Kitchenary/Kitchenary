@@ -2,17 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Kitchenary.Classes
+namespace Recommendation
 {
-    public class IngredientsOperations
+    public static class IngredientsOperations
     {
 
-        private IEnumerable<String> getTempVectorSpace(IngredientList listA, IngredientList listB)
+        private static IEnumerable<String> getTempVectorSpace(IngredientList listA, IngredientList listB)
         {
             return listA.Keys.Union(listB.Keys);
         }
 
-        public double minSquaredDist(IngredientList listA, IngredientList listB)
+        public static double MinSquaredDist(IngredientList listA, IngredientList listB)
         {
             double sum = 0;
             IEnumerable<String> keys = getTempVectorSpace(listA, listB);

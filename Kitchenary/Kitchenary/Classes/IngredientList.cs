@@ -24,14 +24,14 @@ namespace Kitchenary.Classes
                     return 0;
                 }
             }
-            set { base[name] = value; }
+            set { base[name] = (int) value; }
         }
 
         public bool containsAll(IngredientList other)
         {
             foreach(String key in other.Keys)
             {
-                if (other[key] == 1 && this[key] != 1)
+                if (other[key].Equals(1) && !this[key].Equals(1))
                 {
                     return false;
                 }
