@@ -1,43 +1,78 @@
 ﻿@{
-        ViewBag.Title = "Home Page";
+    ViewBag.Title = "Home Page";
 }
 
 @model IEnumerable<EdamamService.Recipe>
 
-<div class="jumbotron">
-    <h1>Kitchenary</h1>
-    <p class="lead">Hackathon 2018</p>
-    <div class="form-group">
-        @using (Html.BeginForm("Index", "Home"))
-        {
-        <div class="row">
-            <div class="col-xs-12">
-                <div class="input-group">
-                    <input type="text" class="form-control" name="query" value="" placeholder="Search for Recipes">
-                    <span class="input-group-btn">
-                        <button class="btn btn-default" type="submit" name="Search Recipes">Search</button>
-                    </span>
-                </div>
-            </div>
-        </div>
-        }
-    </div>
-    @if (Model != null && Model.Count() > 0)
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Sign-In with Microsoft Guided Setup (Work Accounts)</title>
+</head>
+<body>
+    @if (!Request.IsAuthenticated)
     {
-        <ul>
-            @foreach (var recipe in Model)
-            {
-                <li>
-                    <b>@recipe.Label</b><br />
-                    Ingredients:
-                    <ul>
-                        @foreach (var ingredient in recipe.Ingredients)
-                        {
-                            <li>@ingredient.Text</li>
-                        }
-                    </ul>
-                </li>
-            }
-        </ul>
+        <!-- If the user is not authenticated, display the sign-in button -->
+        <br /><a href="@Url.Action("SignIn", "Home")" style="text-decoration: none;">
+            <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="300px" height="50px" viewBox="0 0 3278 522" class="SignInButton">
+            <style type="text/css">
+                .fil0:hover {
+                    fill: #4B4B4B;
+                }
+
+                .fnt0 {
+                    font-size: 260px;
+                    font-family: 'Segoe UI Semibold', 'Segoe UI';
+                    text-decoration: none;
+                }
+</style>
+            <rect class="fil0" x="2" y="2" width="3174" height="517" fill="black" /><rect x="150" y="129" width="122" height="122" fill="#F35325" /><rect x="284" y="129" width="122" height="122" fill="#81BC06" /><rect x="150" y="263" width="122" height="122" fill="#05A6F0" /><rect x="284" y="263" width="122" height="122" fill="#FFBA08" /><text x="470" y="357" fill="white" class="fnt0">Sign in with Microsoft</text>
+        </svg>
+        </a>
     }
-</div>
+    else
+    {
+              <div class="jumbotron">
+                  <h1>Kitchenary</h1>
+                  <p class="lead">Hackathon 2018</p>
+                  <div class="form-group">
+                      @using (Html.BeginForm("Index", "Home"))
+                      {
+                          <div class="row">
+                              <div class="col-xs-12">
+                                  <div class="input-group">
+                                      <input type="text" class="form-control" name="query" value="" placeholder="Search for Recipes">
+                                      <span class="input-group-btn">
+                                          <button class="btn btn-default" type="submit" name="Search Recipes">Search</button>
+                                      </span>
+                                  </div>
+                              </div>
+                          </div>
+                      }
+                  </div>
+                  @if (Model != null && Model.Count() > 0)
+                  {
+                      <ul>
+                          @foreach (var recipe in Model)
+                          {
+                              <li>
+                                  <b>@recipe.Label</b><br />
+                                  Ingredients:
+                                  <ul>
+                                      @foreach (var ingredient in recipe.Ingredients)
+                                      {
+                                          <li>@ingredient.Text</li>
+                                      }
+                                  </ul>
+                              </li>
+                          }
+                      </ul>
+                  }
+              </div>
+    }
+    @if (!string.IsNullOrWhiteSpace(Request.QueryString["errormessage"]))
+    {
+        <div style="background-color:red;color:white;font-weight: bold;">Error: @Request.QueryString["errormessage"]</div>
+    }
+</body>
+</html>
