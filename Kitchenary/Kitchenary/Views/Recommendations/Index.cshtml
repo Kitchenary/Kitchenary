@@ -3,6 +3,8 @@
     ViewBag.Title = "Recommendations";
 }
 
+@model  List<Tuple<EdamamService.Recipe, double>>
+
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
@@ -31,10 +33,32 @@
     }
     else
     {
-        <div class="jumbotron">
-            <h1>Recommendations</h1>
-            <p class="lead">Hello @ViewBag.Name!</p>
-        </div>
+              <div class="jumbotron">
+                  <h1>Recommendations</h1>
+                  <p class="lead">Hello @ViewBag.Name!</p>
+                  @if (Model != null && Model.Count > 0)
+                  {
+                      foreach (var recipe in Model)
+                      {
+                      <div class="panel panel-default">
+                          <div class="panel-heading">
+                              <div class="panel-title">@recipe.Item1.Label</div>
+                          </div>
+                          <div class="panel-body">
+                              <ul>
+                                  @foreach (var ingredient in recipe.Item1.Ingredients)
+                                  {
+                                      <li>@ingredient.Text</li>
+                                  }
+                              </ul>
+                          </div>
+                          <div class="panel-footer">
+                              <div class="panel"
+                          </div>
+                      </div>
+                      }
+                  }
+              </div>
     }
     @if (!string.IsNullOrWhiteSpace(Request.QueryString["errormessage"]))
     {

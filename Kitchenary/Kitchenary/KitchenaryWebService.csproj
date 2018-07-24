@@ -261,6 +261,10 @@
       <Project>{5ffae2ce-db79-408d-99d4-1f6cb24b25ae}</Project>
       <Name>EdamamService</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Recommendation\Recommendation.csproj">
+      <Project>{eeb22652-c6ef-4dc9-9e88-7580f3e69b8d}</Project>
+      <Name>Recommendation</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
