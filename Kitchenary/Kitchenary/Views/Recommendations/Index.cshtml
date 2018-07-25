@@ -45,6 +45,8 @@
                               <div class="panel-title">@recipe.Item1.Label</div>
                           </div>
                           <div class="panel-body">
+                              <a target="_blank" href="@recipe.Item1.Url">Link to Recipe</a>
+                              <h5>Ingredients:</h5>
                               <ul>
                                   @foreach (var ingredient in recipe.Item1.Ingredients)
                                   {
