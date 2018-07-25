@@ -56,12 +56,23 @@
 
                   @if (Model != null && Model.Count() > 0)
                   {
-                  <ul>
-                      @foreach(var pantryItem in Model)
-                      {
-                        <li>@pantryItem.Item - @pantryItem.Quantity</li>
-                      }
-                  </ul>
+                  <table class="table table-striped">
+                      <thead>
+                          <tr>
+                              <td><b>Item</b></td>
+                              <td><b>Quantity</b></td>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          @foreach (var pantryItem in Model)
+                          {
+                              <tr>
+                                  <td>@pantryItem.Item</td>
+                                  <td>@pantryItem.Quantity</td>
+                              </tr>
+                          }
+                      </tbody>
+                  </table>
                   }
 
               </div>
