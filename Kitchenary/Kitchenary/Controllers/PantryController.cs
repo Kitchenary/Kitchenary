@@ -24,7 +24,7 @@ namespace Kitchenary.Controllers
             var userClaims = User.Identity as System.Security.Claims.ClaimsIdentity;
             ViewBag.Name = userClaims?.FindFirst("name")?.Value;
 
-            var results = TableActions.GetPantryResult("PantryTable", userClaims?.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value);
+            var results = TableActions.GetPantryResult("PantryTable", userClaims?.FindFirst(System.IdentityModel.Claims.ClaimTypes.Name)?.Value);
 
             List<PantryModel> pantryItems = new List<PantryModel>();
             foreach (var item in results)
@@ -41,13 +41,13 @@ namespace Kitchenary.Controllers
             var userClaims = User.Identity as System.Security.Claims.ClaimsIdentity;
             ViewBag.Name = userClaims?.FindFirst("name")?.Value;
 
-            PantryEntity pantryEntity = new PantryEntity(userClaims?.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value, ingredient);
+            PantryEntity pantryEntity = new PantryEntity(userClaims?.FindFirst(System.IdentityModel.Claims.ClaimTypes.Name)?.Value, ingredient);
             pantryEntity.foodCategory = "food";
             pantryEntity.quantity = quantity;
             pantryEntity.ExpirationTime = DateTime.UtcNow;
             TableActions.AddRow("PantryTable", (TableEntity)pantryEntity);
 
-            var results = TableActions.GetPantryResult("PantryTable", userClaims?.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value);
+            var results = TableActions.GetPantryResult("PantryTable", userClaims?.FindFirst(System.IdentityModel.Claims.ClaimTypes.Name)?.Value);
 
             List<PantryModel> pantryItems = new List<PantryModel>();
             foreach(var item in results)

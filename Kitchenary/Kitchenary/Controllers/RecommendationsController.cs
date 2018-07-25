@@ -18,8 +18,8 @@ namespace Kitchenary.Controllers
             var userClaims = User.Identity as System.Security.Claims.ClaimsIdentity;
             ViewBag.Name = userClaims?.FindFirst("name")?.Value;
 
-            IEnumerable<PreferenceEntity> preferenceEntities = TableActions.GetPreferencesResult("PreferenceTable", userClaims?.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value);
-            IEnumerable<PantryEntity> pantryEntities = TableActions.GetPantryResult("PantryTable", userClaims?.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value);
+            IEnumerable<PreferenceEntity> preferenceEntities = TableActions.GetPreferencesResult("PreferenceTable", userClaims?.FindFirst(System.IdentityModel.Claims.ClaimTypes.Name)?.Value);
+            IEnumerable<PantryEntity> pantryEntities = TableActions.GetPantryResult("PantryTable", userClaims?.FindFirst(System.IdentityModel.Claims.ClaimTypes.Name)?.Value);
 
             var preference = preferenceEntities.FirstOrDefault();
             IEnumerable<string> dietaryRestrictions = null;
