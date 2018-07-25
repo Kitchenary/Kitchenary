@@ -90,7 +90,7 @@ namespace Recommendation
          * Step Three: Rank each recipe against the user preferences
          * Step Four: Return the sorted list
          */
-        public static async Task<List<Tuple<Recipe, double>>> GetRecommendations(IngredientList userPreferences, IngredientList pantry)
+        public static async Task<List<Tuple<Recipe, double>>> GetRecommendations(IngredientList userPreferences, IngredientList pantry, IEnumerable<string> dietaryRestrictions, string diet)
         {
             if(client == null)
             {
@@ -110,7 +110,29 @@ namespace Recommendation
                 }
             }
 
-            var recipeRecs = await client.SearchRecipes(searchQuery);
+            RecipeSearchSettings searchSettings = new RecipeSearchSettings();
+            if (dietaryRestrictions != null && dietaryRestrictions.Count() > 0)
+            {
+                foreach(var restriction in dietaryRestrictions)
+                {
+                    var enumRestriction = Health.DEFAULT;
+                    Enum.TryParse<Health>(restriction, out enumRestriction);
+                    if (searchSettings.Health == null)
+                    {
+                        searchSettings.Health = new List<Health>();
+                    }
+                    searchSettings.Health.Add(enumRestriction);
+                }
+            }
+
+            if (diet != null)
+            {
+                var enumRestriction = Diet.BALANCED;
+                Enum.TryParse<Diet>(diet, out enumRestriction);
+                searchSettings.Diet = enumRestriction;
+            }
+
+            var recipeRecs = await client.SearchRecipes(searchQuery, searchSettings);
 
             if (recipeRecs.Count() == 0)
             {

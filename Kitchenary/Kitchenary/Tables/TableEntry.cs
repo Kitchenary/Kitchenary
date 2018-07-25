@@ -19,9 +19,9 @@ namespace TableClients
 		}
 		public PreferenceEntity()
 		{ }
-		public string[] dietPreference { get; set; }
-		public string[] healthPreference { get; set; }
-        public string[] otherPreference { get; set; }
+		public string dietPreference { get; set; }
+		public string healthPreference { get; set; }
+        public string otherPreference { get; set; }
         
     }
 

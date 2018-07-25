@@ -18,13 +18,23 @@ namespace Kitchenary.Controllers
             var userClaims = User.Identity as System.Security.Claims.ClaimsIdentity;
             ViewBag.Name = userClaims?.FindFirst("name")?.Value;
 
+            IEnumerable<PreferenceEntity> preferenceEntities = TableActions.GetPreferencesResult("PreferenceTable", userClaims?.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value);
             IEnumerable<PantryEntity> pantryEntities = TableActions.GetPantryResult("PantryTable", userClaims?.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value);
+
+            var preference = preferenceEntities.FirstOrDefault();
+            IEnumerable<string> dietaryRestrictions = null;
+            string diet = null;
+            if (preference != null)
+            {
+                dietaryRestrictions = preference.healthPreference.Split(',');
+                diet = preference.dietPreference;
+            }
 
             string[] foods = { "pork", "bread", "peppers", "sugar", "corn" };
             string[] pantryList = pantryEntities.Select(x => x.RowKey).ToArray();
             IngredientList userPreferences = new IngredientList(foods);
             IngredientList pantry = new IngredientList(pantryList);
-            List<Tuple<Recipe, double>> recs = await Recommender.GetRecommendations(userPreferences, pantry);
+            List<Tuple<Recipe, double>> recs = await Recommender.GetRecommendations(userPreferences, pantry, dietaryRestrictions, diet);
 
             return View(recs);
         }

@@ -47,7 +47,7 @@
 
                       <div class="col-sm-6">
                           <h4>Diet</h4>
-                          @Html.DropDownListFor(x => x.Diet, new SelectList(Enum.GetValues(typeof(EdamamService.Diet))), new { multiple = "multiple", @class = "form-control" })
+                          @Html.DropDownListFor(x => x.Diet, new SelectList(Enum.GetValues(typeof(EdamamService.Diet))), new {@class = "form-control" })
                       </div>
                   </div>
 
