@@ -1,8 +1,9 @@
-﻿@{
-    ViewBag.Title = "Preferences";
+﻿
+@{
+    ViewBag.Title = "Pantry";
 }
 
-@model Kitchenary.Models.PreferencesModel
+@model IEnumerable<Kitchenary.Controllers.PantryModel>
 
 <html>
 <head>
@@ -33,30 +34,36 @@
     else
     {
               <div class="jumbotron">
-                  <h1>Preferences</h1>
+                  <h1>Pantry</h1>
                   <p class="lead">Hello @ViewBag.Name!</p>
-                  <p>Select your preferences below:</p>
-
-                  @using (Html.BeginForm("Create", "Preferences", FormMethod.Post))
-                  {
-                  <div class="row">
-                      <div class="col-sm-6">
-                          <h4>Dietary Restrictions:</h4>
-                          @Html.DropDownListFor(x => x.DietaryRestrictions, new SelectList(Enum.GetValues(typeof(EdamamService.Health))), new { multiple = "multiple", @class = "form-control" })
-                      </div>
-
-                      <div class="col-sm-6">
-                          <h4>Diet</h4>
-                          @Html.DropDownListFor(x => x.Diet, new SelectList(Enum.GetValues(typeof(EdamamService.Diet))), new { multiple = "multiple", @class = "form-control" })
-                      </div>
-                  </div>
-
-                  <br />
+                  <div class="form-group">
+                      @using (Html.BeginForm("AddIngredient", "Pantry"))
+                      {
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" name="ingredient" value="" placeholder="Add Ingredient" />
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" name="quantity" placeholder="Quantity" />
+                            </div>
+                        </div>
+                      <br />
                       <span class="input-group-btn">
                           <button class="btn btn-default" type="submit" name="Save Preferences">Save</button>
                       </span>
+                    }
+                  </div>
 
+                  @if (Model != null && Model.Count() > 0)
+                  {
+                  <ul>
+                      @foreach(var pantryItem in Model)
+                      {
+                        <li>@pantryItem.Item - @pantryItem.Quantity</li>
+                      }
+                  </ul>
                   }
+
               </div>
     }
     @if (!string.IsNullOrWhiteSpace(Request.QueryString["errormessage"]))

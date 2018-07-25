@@ -5,6 +5,7 @@ using Microsoft.WindowsAzure.Storage.Auth;
 using Microsoft.WindowsAzure.Storage.Table;
 using Microsoft.Azure;
 using System.Collections.Generic;
+using TableClients;
 
 namespace Kitchenary
 {
@@ -30,8 +31,21 @@ namespace Kitchenary
             var tableClient = storageAccount.CreateCloudTableClient();
             CloudTable myTable = tableClient.GetTableReference(tableName);
             //build filter string
-            string myTableFilter = TableQuery.GenerateFilterCondition("PrimaryKey", QueryComparisons.Equal, user);
+            string myTableFilter = TableQuery.GenerateFilterCondition("PartitionKey", QueryComparisons.Equal, user);
             TableQuery<TableEntity> tableQuery = new TableQuery<TableEntity>().Where(myTableFilter);
+            return myTable.ExecuteQuery(tableQuery);
+
+        }
+        public static IEnumerable<PantryEntity> GetPantryResult(string tableName, string user)
+        {
+            string storageAccountName = ConfigurationManager.AppSettings["StorageAccount"];
+            string storageAccountKey = ConfigurationManager.AppSettings["StorageKey"];
+            CloudStorageAccount storageAccount = new CloudStorageAccount(new StorageCredentials(storageAccountName, storageAccountKey), true);
+            var tableClient = storageAccount.CreateCloudTableClient();
+            CloudTable myTable = tableClient.GetTableReference(tableName);
+            //build filter string
+            string myTableFilter = TableQuery.GenerateFilterCondition("PartitionKey", QueryComparisons.Equal, user);
+            TableQuery<PantryEntity> tableQuery = new TableQuery<PantryEntity>().Where(myTableFilter);
             return myTable.ExecuteQuery(tableQuery);
 
         }

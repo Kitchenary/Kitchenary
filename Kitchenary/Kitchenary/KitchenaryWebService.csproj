@@ -191,6 +191,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ClaimsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PantryController.cs" />
     <Compile Include="Controllers\PreferencesController.cs" />
     <Compile Include="Controllers\RecommendationsController.cs" />
     <Compile Include="Global.asax.cs">
@@ -246,6 +247,7 @@
     <Content Include="Views\Claims\Index.cshtml" />
     <Content Include="Views\Recommendations\Index.cshtml" />
     <Content Include="Views\Preferences\Index.cshtml" />
+    <Content Include="Views\Pantry\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
